@@ -89,30 +89,5 @@ public class EX04 {
 
         fmt = "1분은 %d초, %d초는 약 %d분\n";
         System.out.printf(fmt, minute, data3, data3 / minute);*/
-
-
-        // 클래스를 사용해 도서 정보를 출력하는 프로그램을 작성하여라.
-/*        class BookInfo {
-            private String bookname = "누구나 알기쉬운 자바 : 입문편";
-            private String  auther = "카와바 타케시";
-            private String  translator = "하진일";
-            private String  publisher = "혜지원";
-            private String  saledate = "2014년 06월";
-            private int  bookprice = 25000;
-            private int  bookdsc = 10;
-            private double  booksale = bookprice - bookprice * ((double)bookdsc / 100);
-            private double bookmile = booksale * ((double)bookdsc / 100);
-        }
-
-        BookInfo Info = new BookInfo();
-        System.out.println("도서명 : " + Info.bookname);
-        System.out.println("저자 : " + Info.auther);
-        System.out.println("역자 : " + Info.translator);
-        System.out.println("출판사 : " + Info.publisher);
-        System.out.println("출간일 : " + Info.saledate);
-        System.out.println("정가 : " + Info.bookprice + '원');
-        System.out.println("판매가 : " + Math.round(Info.booksale*10)/10 + '원');
-        System.out.println("할인율 : " + Info.bookdsc + '%');
-        System.out.println("적립금 : " + Math.round(Info.bookmile*10)/10 + '원');*/
     }
 }
