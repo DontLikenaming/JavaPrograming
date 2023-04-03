@@ -26,22 +26,23 @@ public class EX01 {
         int chk_qty = 1;
         int chickensum = chicken * chk_qty;
 
-        int total = (soju * soju_qty) + (chicken * chk_qty);
+        int total = sojusum + chickensum;
+        double vat = total * 0.1;
         int money = 50000;
 
         System.out.println(" ");
         System.out.println("[ 음식나라 ]");
         System.out.println("-------------------------");
-        System.out.println("소주           "+sojusum);
-        System.out.println("너나치킨       "+chickensum);
+        System.out.printf("소주\t\t%d\t%5d\n", soju_qty, sojusum);
+        System.out.printf("너나치킨\t%d\t%d\n", chk_qty, chickensum);
         System.out.println("-------------------------");
-        System.out.println("과세합계       "+(total-(total/10)));
-        System.out.println("부가세         "+(total/10));
+        System.out.printf("과세합계\t\t%.0f\n",total-vat);
+        System.out.printf("부가세\t\t\t%5.0f\n",vat);
         System.out.println("-------------------------");
-        System.out.println("총합계         "+total);
-        System.out.println("받은금액       "+money);
-        System.out.println("잔돈           "+(money-total));
+        System.out.printf("총합계\t\t\t%d\n", total);
+        System.out.printf("받은금액\t\t%d\n", money);
+        System.out.printf("잔돈\t\t\t%d\n", money-total);
         System.out.println("-------------------------");
-        System.out.println("2014. 07. 07 14:35:24");
+        System.out.println("2023. 04. 03\t10:06:00");
     }
 }
