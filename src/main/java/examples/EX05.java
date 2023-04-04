@@ -202,7 +202,7 @@ public class EX05 {
 
 
         // 임의의 숫자 6자리를 입력하면 신용카드의 종류와 은행정보를 출력 (CardCheck)
-        Scanner input = new Scanner(System.in);
+/*        Scanner input = new Scanner(System.in);
         int num = 0;
         String result = "";
 
@@ -260,7 +260,39 @@ public class EX05 {
                 default: break;
             }} else result ="잘못된 카드번호 입니다.";
 
-        System.out.printf("입력된 카드번호 : %d 카드 종류 : %s\n", num, result);
+        System.out.printf("입력된 카드번호 : %d 카드 종류 : %s\n", num, result);*/
 
+
+        // 거리를 km로 입력했을 때 거리에 따라 배송료를 계산하는 프로그램을 작성
+        // (CalcurateFee)
+        // 50km 미만 : 10000원
+        // 50 ~ 100km : 18000원
+        // 100 ~ 300km : 55000원
+        // 300km 이상 : 75000원
+        Scanner input = new Scanner(System.in);
+        double dist = 0;
+        int result = -1;
+
+        while (true) {
+            System.out.println("배송할 거리를 입력하세요.(km 단위, 소수점 이하는 올림처리 됨)");
+            dist = input.nextDouble();
+            if(dist>0){
+                dist = Math.ceil(dist);
+                break;
+            }
+            System.out.println("잘못 입력하셨습니다.");
+        }
+
+        if(dist>=300){
+            result = 75000;
+        } else if(dist>=100){
+            result = 55000;
+        } else if(dist>=50){
+            result = 18000;
+        } else {
+            result = 10000;
+        }
+
+        System.out.printf("%.0fkm의 배송료는 %d입니다.",dist,result);
     }
 }
