@@ -1,4 +1,5 @@
 package examples;
+import java.util.Random;
 import java.util.Scanner;
 
 public class EX06 {
@@ -31,6 +32,12 @@ public class EX06 {
         for (int i=0;i<3;i++) {
             System.out.print(yourkey[i]+" ");
         }
+
+*//*        Random rnd = new Random();
+        for (int k=0;k<3;k++) {
+            lottokey[k] = rnd.nextInt(9)+1;
+        }*//*
+
 
         for (int k=0;k<3;k++) {
             lottokey[k] = (int)(Math.random() * 10);
