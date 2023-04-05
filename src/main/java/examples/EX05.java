@@ -269,7 +269,7 @@ public class EX05 {
         // 50 ~ 100km : 18000원
         // 100 ~ 300km : 55000원
         // 300km 이상 : 75000원
-        Scanner input = new Scanner(System.in);
+/*        Scanner input = new Scanner(System.in);
         double dist = 0;
         int result = -1;
 
@@ -293,6 +293,6 @@ public class EX05 {
             result = 10000;
         }
 
-        System.out.printf("%.0fkm의 배송료는 %d입니다.",dist,result);
+        System.out.printf("%.0fkm의 배송료는 %d입니다.",dist,result);*/
     }
 }
