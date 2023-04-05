@@ -129,11 +129,11 @@ public class C06Loop {
 
         // 1부터 10000까지의 총합을 계산
         // 단, 5의 배수와 7의 배수는 계산에서 제외
-        int sum = 0;
+/*        int sum = 0;
         for(int i = 0;i<=10000;i++){
             if((i%5==0)||(i%7==0))continue;
             sum += i;
         }
-        System.out.printf("총합 : %d\n", sum);
+        System.out.printf("총합 : %d\n", sum);*/
     }
 }
