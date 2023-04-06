@@ -124,7 +124,7 @@ public class EX06 {
         // 몇 년이 지나야 통장잔액이 지금의 2배를 넘는지
         // 알아보는 프로그램 작성 (ComputeInvestment)
         // 원금 25000원에 연 이율 6%를 적용하면 12년 뒤에 2배 수익을 얻을 수 있음.
-        int balance = 25000;
+/*        int balance = 25000;
         int dest = balance;
         double interest = 0.06;
         int year = 0;
@@ -136,7 +136,7 @@ public class EX06 {
             if(balance>dest*2)break;
         }
         System.out.printf("%d년 후 예금액 %d원 이자 %.0f원 (원금 2배 초과)\n",
-                          year, balance, balance*interest);
+                          year, balance, balance*interest);*/
 
 
     }
