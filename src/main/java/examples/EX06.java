@@ -73,24 +73,33 @@ public class EX06 {
 /*        Scanner input = new Scanner(System.in);
         int num1 = 0;
         int num2 = 0;
+        String result = "";
+        boolean clear = false;
 
-        while (true) {
-            System.out.println("1부터 100까지의 숫자를 입력하세요.");
-            num1 = Integer.parseInt(input.next());
+        for (int i = 0; i < 10; i++) {
+            num2 = (int)(Math.random()*100+1);
+            while (true) {
+                System.out.println("1부터 100까지의 숫자를 입력하세요. ("+(i+1)+"/10)");
+                num1 = Integer.parseInt(input.next());
 
-            if((num1>=1)&&(num1<=100)){
-                break;
+                if((num1>=1)&&(num1<=100)){
+                    break;
+                }
+                System.out.println("잘못 입력하셨습니다.\n");
             }
-            System.out.println("잘못 입력하셨습니다.\n");
-        }
 
-        num2 = (int)(Math.random()*100+1);
-        System.out.printf("입력한 번호 : %d 당첨 번호 : %d\n", num1, num2);
-        switch (Integer.compare(num1,num2)){
-            case 0 : System.out.println("빙고! 숫자를 맞췄습니다!"); break;
-            case 1 : System.out.println("추측한 숫자가 큽니다."); break;
-            case -1 : System.out.println("추측한 숫자가 작습니다."); break;
-        };*/
+
+            System.out.printf("입력한 번호 : %d 당첨 번호 : %d\n", num1, num2);
+            switch (Integer.compare(num1,num2)){
+                case 0 : result = "빙고! 숫자를 맞췄습니다!"; clear = true; break;
+                case 1 : result = "추측한 숫자가 큽니다."; break;
+                case -1 : result = "추측한 숫자가 작습니다."; break;
+            };
+
+            System.out.println(result+"\n");
+            if((i==9)&&(!clear)){System.out.println("다음 기회에!");break;}
+            else if(clear) break;
+        }*/
 
 
         // 키보드로 정수를 하나 입력받아 다음 조건에 따라
@@ -119,15 +128,16 @@ public class EX06 {
         int dest = balance;
         double interest = 0.06;
         int year = 0;
-        System.out.printf("원금 %d원\n", dest);
         while (true){
-            year++;
+            if(year==0){System.out.printf("첫 해 예금액 %d원 이자 %.0f원\n", balance, balance*interest);}
+            else {System.out.printf("%d년 후 예금액 %d원 이자 %.0f원\n", year, balance, balance*interest);}
             balance += balance*interest;
+            year++;
             if(balance>dest*2)break;
-            System.out.printf("%d년 후  %d원\n", year, balance);
         }
-        System.out.printf("%d년 후 원금 %d원의 2배를 넘는 %d원이 됩니다.\n",
-                          year, dest, balance);*/
+        System.out.printf("%d년 후 예금액 %d원 이자 %.0f원 (원금 2배 초과)\n",
+                          year, balance, balance*interest);*/
+
 
     }
 }
