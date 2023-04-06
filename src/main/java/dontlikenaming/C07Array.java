@@ -26,8 +26,8 @@ public class C07Array {
         // 변수명.add("값") : ArrayList에 값 추가
         // 변수명.get(index) : ArrayList의 특정 index에 있는 값 리턴
         // 변수명.size() : ArrayList에 들어있는 객체의 수 리턴
-        // 변수명.indexOf(index) : 해당 객체가 있는 ArrayList의 인덱스 리턴
-        // 변수명.contains(값) : 해당 객체가 ArrayList에 있는지 확인
+        // 변수명.indexOf("값") : 해당 객체가 있는 ArrayList의 인덱스 리턴
+        // 변수명.contains("값") : 해당 객체가 ArrayList에 있는지 확인
         // 변수명.isEmpty() : ArrayList가 비어있는지 확인
 /*        ArrayList<String> menus = new ArrayList<>();
         menus.add("라면");
