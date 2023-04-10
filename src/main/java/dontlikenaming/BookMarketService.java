@@ -4,9 +4,11 @@ import java.util.Scanner;
 public class BookMarketService {
     private Scanner input = null;
     private Membership m = null;
+    private Books b = null;
 
     public BookMarketService() {
         input = new Scanner(System.in);
+        registerBooks();
     }
 
     public String displayMenu() {
@@ -56,6 +58,7 @@ public class BookMarketService {
 
             case "2":
                 System.out.println("상품목록 보기\n");
+
                 break;
 
             case "3":
@@ -64,6 +67,7 @@ public class BookMarketService {
 
             case "4":
                 System.out.println("장바구니 상품 추가\n");
+                System.out.println(b);
                 break;
 
             case "5":
@@ -93,5 +97,11 @@ public class BookMarketService {
         String hp = input.next();
 
         m = new Membership(001, name, email, hp);
+    }
+
+    // 도서 정보 자동 등록
+    public void registerBooks() {
+        b = new Books();
+        b.BookList();
     }
 }
