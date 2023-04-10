@@ -20,79 +20,77 @@ public class SungJukVO {
         this.mat = mat;
     }
 
-
-    public int getSjon() {
-        return sjon;
-    }
-
     public void setSjon(int sjon) {
         this.sjon = sjon;
     }
 
-    public String getName() {
-        return name;
+    public int getSjon() {
+        return sjon;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getKor() {
-        return kor;
+    public String getName() {
+        return name;
     }
 
     public void setKor(int kor) {
         this.kor = kor;
     }
 
-    public int getEng() {
-        return eng;
+    public int getKor() {
+        return kor;
     }
 
     public void setEng(int eng) {
         this.eng = eng;
     }
 
-    public int getMat() {
-        return mat;
+    public int getEng() {
+        return eng;
     }
 
     public void setMat(int mat) {
         this.mat = mat;
     }
 
-    public int getTot() {
-        return tot;
+    public int getMat() {
+        return mat;
     }
 
     public void setTot(int tot) {
         this.tot = tot;
     }
 
-    public double getAvg() {
-        return avg;
+    public int getTot() {
+        return tot;
     }
 
     public void setAvg(double avg) {
         this.avg = avg;
     }
 
-    public char getGrd() {
-        return grd;
+    public double getAvg() {
+        return avg;
     }
 
     public void setGrd(char grd) {
         this.grd = grd;
     }
 
-    public String getRegdate() {
-        return regdate;
+    public char getGrd() {
+        return grd;
     }
 
     public void setRegdate(String regdate) {
         this.regdate = regdate;
     }
 
+    public String getRegdate() {
+        return regdate;
+    }
 
 
     @Override
