@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class BookMarketService {
     private Scanner input = null;
+    private Membership m = null;
 
     public BookMarketService() {
         input = new Scanner(System.in);
@@ -40,6 +41,7 @@ public class BookMarketService {
         return selectMenu;
     }
 
+    // 메뉴 분기 처리
     public void processMenu(String selectMenu) {
         switch (selectMenu) {
             case "0":
@@ -48,35 +50,48 @@ public class BookMarketService {
                 break;
 
             case "1":
-                System.out.println("고객번호 확인");
+                System.out.println("고객정보 확인\n");
+                System.out.println(m);
                 break;
 
             case "2":
-                System.out.println("상품목록 보기");
+                System.out.println("상품목록 보기\n");
                 break;
 
             case "3":
-                System.out.println("장바구니 비우기");
+                System.out.println("장바구니 비우기\n");
                 break;
 
             case "4":
-                System.out.println("장바구니 상품 추가");
+                System.out.println("장바구니 상품 추가\n");
                 break;
 
             case "5":
-                System.out.println("주문 수량 변경");
+                System.out.println("주문 수량 변경\n");
                 break;
 
             case "6":
-                System.out.println("장바구니 상품 삭제");
+                System.out.println("장바구니 상품 삭제\n");
                 break;
 
             case "7":
-                System.out.println("영수증 표시");
+                System.out.println("영수증 표시\n");
                 break;
 
             default:
                 System.out.println("잘못 입력하셨습니다.");
         }
+    }
+
+    // 회원 등록
+    public void registerMember() {
+        System.out.print("이름을 입력하세요. ");
+        String name = input.next();
+        System.out.print("이메일을 입력하세요. ");
+        String email = input.next();
+        System.out.print("전화번호를 입력하세요. (-빼고 입력) ");
+        String hp = input.next();
+
+        m = new Membership(001, name, email, hp);
     }
 }
