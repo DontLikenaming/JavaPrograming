@@ -1,69 +1,28 @@
 package dontlikenaming;
 
-public class C16OOP {
-    // 상속 (확장 : Extend)
-    // 부모클래스로부터 변수, 메서드를 물려받아
-    // 새로운 클래스를 만드는 기법
-    // 한번 정의된 데이터 유형을 필요에 따라
-    // 다시 재활용함으로써 반복되는 코드를 줄일수 있음
+public class C17OOP {
+    // 추상 클래스
+    // 추상 메서드를 포함하는 클래스
+    // 추상 메서드 : 메서드의 선언부만 있고, 몸체가 없는 메서드
+    // 메서드의 몸체는 이것을 상속하는 자식클래스에서 정의함
 
-    // 상속의 장점 : 기존 클래스 재활용, 중복코드 배제, 유지보수 용이
-    // 통일성 유지, 다형성 구현 용이
+    // 따라서, 추상 클래스는 불완전 클래스이므로
+    // 객체화할 수 없음
+    // 추상 메서드나 추상 클래스는 abstract라는 키워드 사용
 
-    // 부모/상위/슈퍼 <=> 자식/하위/파생
-
-    // 메서드 재정의(override)
-    // 객체지향 중요 3대 개념중 다형성에 해당
-    // 상속 관계에 있는 상위 클래스의 메서드를
-    // 하위 클래스에서 같은 이름의 메서드로 다시 작성하는 것을 의미
-    // 즉, 상속받은 메서드를 새로 정의해서 사용하는 것을 말함
-
-    // 클래스 형변환
-    // 다형성의 또 다른 예
-    // upcasting : 자식 클래스가 부모 클래스로 변환하는 것 (자동)
-    // downcasting : 부모 클래스가 자식 클래스로 변환하는 것 (수동)
     public static void main(String[] args) {
-        //SCV scv1 = new SCV();
-        //Marine marine1 = new Marine();
-        //Medic Medic1 = new Medic();
-        //Firebat Firebat1 = new Firebat();
-        Unit scv1 = new SCV();            // 클래스 형변환 upcasting
-                                           // scv -> unit
-        Unit marine1 = new Marine();
-        Unit Medic1 = new Medic();
-        Unit Firebat1 = new Firebat();
-        System.out.printf("%s\n",scv1.name);
-        System.out.printf("체력 : %d\n",scv1.life);
-        //scv1.collect();             // Unit 클래스 안에는 collect가
-                                          // 없기 때문에 사용 불가
+        // 추상 클래스 객체화 시도 - 불가능
+        // Unit2 unit2 = new Unit2();
 
-        ((SCV)scv1).collect();            // 클래스 형변환 downcasting
-                                          // SCV 클래스에 있는 것을 사용 가능
-        scv1.attack();
+        Unit2 scv2 = new SCV2();
+        ((SCV2)scv2).collect();
+        scv2.attack();
+        scv2.move();
 
-        System.out.printf("\n%s\n",marine1.name);
-        System.out.printf("체력 : %d\n",marine1.life);
-        marine1.attack();
-        ((Marine)marine1).useSteampack();
-
-        System.out.printf("\n%s\n",Medic1.name);
-        System.out.printf("체력 : %d\n",Medic1.life);
-        Medic1.attack();
-        ((Medic)Medic1).useOpticalflare();
-
-        System.out.printf("\n%s\n",Firebat1.name);
-        System.out.printf("체력 : %d\n",Firebat1.life);
-        Firebat1.attack();
-        ((Firebat)Firebat1).useSteampack();
-
-        // 부모클래스인 Unit도 객체화 가능
-        Unit unit1 = new Unit();
-        System.out.printf("\n%s\n",unit1.name);
-        System.out.printf("체력 : %d\n",unit1.life);
     }
 }
 
-class Unit {
+abstract class Unit2 {
     protected String name;
     protected int life;
     protected int power;
@@ -77,9 +36,9 @@ class Unit {
     protected String attackAble = "g";
     protected String weapon;
 
-    public Unit() {}
+    public Unit2() {}
 
-    public Unit(
+    public Unit2(
             String name, int life, int power, int defense,
             double atkCycle, double atkRange, int sight, double speed,
             int carrySize, char size, String attackAble, String weapon)
@@ -98,21 +57,19 @@ class Unit {
         this.weapon = weapon;
     }
 
-    public void attack() {
-            System.out.printf("%s(%d)로 공격 중...\n", weapon, power);
-    }
-    public void move() {}
+    protected abstract void attack();
+    protected abstract void move();
 }
 
-class SCV extends Unit {
-    public SCV() {
+class SCV2 extends Unit2 {
+    public SCV2() {
         // super : 부모 클래스의 생성자를 호출하는 특수한 키워드
         super("SCV", 60, 5, 0, 15,
                 1, 7, 2.344, 1,
                 'S', "g", "융합 절단기");
     }
 
-    public SCV(
+    public SCV2(
             String name, int life, int power, int defense,
             double atkCycle, double atkRange, int sight, double speed,
             int carrySize, char size, String attackAble, String weapon) {
@@ -120,7 +77,12 @@ class SCV extends Unit {
 
     @Override   // annotation : 컴파일러에게 알려주는 메모
     public void attack() {
-        super.attack();
+        System.out.printf("%s(%d)로 공격 중...\n", weapon, power);
+    }
+
+    @Override
+    protected void move() {
+        System.out.printf("%.3f 속도로 이동 중...\n", speed);
     }
 
     protected void collect() {
@@ -128,14 +90,14 @@ class SCV extends Unit {
     }
 }
 
-class Marine extends Unit {
-    public Marine() {
+class Marine2 extends Unit2 {
+    public Marine2() {
         super("Marine", 40, 6, 0, 15,
                 4, 7, 1.875, 1,
                 'S', "gs", "가우스 소총");
     }
 
-    public Marine(
+    public Marine2(
             String name, int life, int power, int defense,
             double atkCycle, double atkRange, int sight, double speed,
             int carrySize, char size, String attackAble, String weapon) {
@@ -143,24 +105,29 @@ class Marine extends Unit {
 
     @Override
     public void attack() {
-        super.attack();
+        System.out.printf("%s(%d)로 공격 중...\n", weapon, power);
+    }
+
+    @Override
+    protected void move() {
+        System.out.printf("%.3f 속도로 이동 중...\n", speed);
     }
 
     protected void useSteampack() {
         System.out.println("전투 자극제 사용!");
         System.out.printf("공격 속도 %.4f로 증가! 이동 속도 %.4f로 증가!\n",
-                          atkCycle/1.72, speed*1.5);
+                atkCycle/1.72, speed*1.5);
     }
 }
 
-class Medic extends Unit {
-    public Medic() {
+class Medic2 extends Unit2 {
+    public Medic2() {
         super("Medic", 60, 0, 1, 0,
                 0, 9, 1.875, 1,
                 'S', "", "");
     }
 
-    public Medic(
+    public Medic2(
             String name, int life, int power, int defense,
             double atkCycle, double atkRange, int sight, double speed,
             int carrySize, char size, String attackAble, String weapon) {
@@ -169,6 +136,11 @@ class Medic extends Unit {
     @Override
     public void attack() {
         System.out.println("일반 공격 불가!");
+    }
+
+    @Override
+    protected void move() {
+        System.out.printf("%.3f 속도로 이동 중...\n", speed);
     }
 
     protected void useHealing() {
@@ -184,14 +156,14 @@ class Medic extends Unit {
     }
 }
 
-class Firebat extends Unit {
-    public Firebat() {
+class Firebat2 extends Unit2 {
+    public Firebat2() {
         super("Firebat", 50, (8)*2, 1, 22,
                 1.5, 7, 1.875, 1,
                 'S', "g", "화염 방사기");
     }
 
-    public Firebat(
+    public Firebat2(
             String name, int life, int power, int defense,
             double atkCycle, double atkRange, int sight, double speed,
             int carrySize, char size, String attackAble, String weapon) {
@@ -199,7 +171,12 @@ class Firebat extends Unit {
 
     @Override
     public void attack() {
-        super.attack();
+        System.out.printf("%s(%d)로 공격 중...\n", weapon, power);
+    }
+
+    @Override
+    protected void move() {
+        System.out.printf("%.3f 속도로 이동 중...\n", speed);
     }
 
     protected void useSteampack() {
