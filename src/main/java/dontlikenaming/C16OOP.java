@@ -1,7 +1,5 @@
 package dontlikenaming;
 
-import java.util.ArrayList;
-
 public class C16OOP {
     // 상속 (확장 : Extend)
     // 부모클래스로부터 변수, 메서드를 물려받아
@@ -20,30 +18,43 @@ public class C16OOP {
     // 하위 클래스에서 같은 이름의 메서드로 다시 작성하는 것을 의미
     // 즉, 상속받은 메서드를 새로 정의해서 사용하는 것을 말함
 
+    // 클래스 형변환
+    // 다형성의 또 다른 예
+    // upcasting : 자식 클래스가 부모 클래스로 변환하는 것 (자동)
+    // downcasting : 부모 클래스가 자식 클래스로 변환하는 것 (수동)
     public static void main(String[] args) {
-        SCV scv1 = new SCV();
+        //SCV scv1 = new SCV();
+        //Marine marine1 = new Marine();
+        //Medic Medic1 = new Medic();
+        //Firebat Firebat1 = new Firebat();
+        Unit scv1 = new SCV();            // 클래스 형변환 upcasting
+                                           // scv -> unit
         Marine marine1 = new Marine();
         Medic Medic1 = new Medic();
         Firebat Firebat1 = new Firebat();
         System.out.printf("%s\n",scv1.name);
         System.out.printf("체력 : %d\n",scv1.life);
-        scv1.collect();
+        //scv1.collect();             // Unit 클래스 안에는 collect가
+                                          // 없기 때문에 사용 불가
+
+        ((SCV)scv1).collect();            // 클래스 형변환 downcasting
+                                          // SCV 클래스에 있는 것을 사용 가능
         scv1.attack();
 
         System.out.printf("\n%s\n",marine1.name);
         System.out.printf("체력 : %d\n",marine1.life);
         marine1.attack();
-        marine1.useSteampack();
+        ((Marine)marine1).useSteampack();
 
         System.out.printf("\n%s\n",Medic1.name);
         System.out.printf("체력 : %d\n",Medic1.life);
         Medic1.attack();
-        Medic1.useOpticalflare();
+        ((Medic)Medic1).useOpticalflare();
 
         System.out.printf("\n%s\n",Firebat1.name);
         System.out.printf("체력 : %d\n",Firebat1.life);
         Firebat1.attack();
-        Firebat1.useSteampack();
+        ((Firebat)Firebat1).useSteampack();
 
     }
 }
