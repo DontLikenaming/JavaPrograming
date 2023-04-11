@@ -118,7 +118,7 @@ class SCV extends Unit {
             int carrySize, char size, String attackAble, String weapon) {
     }
 
-    @Override   // annotation : 컴파일러에게 알려주는 메모
+    @Override   // annotation : 컴파일러에게 알려주는 메타데이터
     public void attack() {
         super.attack();
     }

@@ -34,13 +34,13 @@ public class C18OOP {
         scv3.attack();
         scv3.move();
 
-        System.out.printf("\n%s\n", marine3.getName());
+        System.out.printf("%s\n", marine3.getName());
         System.out.printf("체력 : %d\n",marine3.getLife());
         marine3.useSteampack();
         marine3.attack();
         marine3.move();
 
-        System.out.printf("\n%s\n", medic3.getName());
+        System.out.printf("%s\n", medic3.getName());
         System.out.printf("체력 : %d\n",medic3.getLife());
         medic3.useHealing();
         medic3.useRestoration();
@@ -48,13 +48,25 @@ public class C18OOP {
         medic3.attack();
         medic3.move();
 
-        System.out.printf("\n%s\n", firebat3.getName());
+        System.out.printf("%s\n", firebat3.getName());
         System.out.printf("체력 : %d\n",firebat3.getLife());
         firebat3.useSteampack();
         firebat3.attack();
         firebat3.move();
 
+        // 다형성 사용 - 인터페이스를 이용하면
+        // 구현관계에 있는 모든 클래스형으로 객체화 가능
+        Unit3Action unit = new SCV3();
+        unit.attack();
+        unit.move();
+        // ((SCV3)scv2).collect();  //Unit3Action에 collect가
+                                        // 정의되어 있지 않음
 
+        unit = new Marine3();
+        unit.attack();
+        unit.move();
+
+        // scv3 = new Marine3();    // scv는 Marine으로 변환 불가
     }
 }
 
@@ -134,7 +146,7 @@ class SCV3 extends Unit3 implements Unit3Action{
 
     @Override
     public void move() {
-        System.out.printf("%.3f 속도로 이동 중...\n", speed);
+        System.out.printf("%.3f 속도로 이동 중...\n\n", speed);
     }
 }
 
@@ -161,12 +173,12 @@ class Marine3 extends Unit3 implements Unit3Action {
 
     @Override
     public void attack() {
-        System.out.printf("%s(%d)로 공격 중...\n", weapon, power);
+        System.out.printf("%s(%d)으로 공격 중...\n", weapon, power);
     }
 
     @Override
     public void move() {
-        System.out.printf("%.3f 속도로 이동 중...\n", speed);
+        System.out.printf("%.3f 속도로 이동 중...\n\n", speed);
     }
 
     protected void useSteampack() {
@@ -204,7 +216,7 @@ class Medic3 extends Unit3 implements Unit3Action {
 
     @Override
     public void move() {
-        System.out.printf("%.3f 속도로 이동 중...\n", speed);
+        System.out.printf("%.3f 속도로 이동 중...\n\n", speed);
     }
 
     protected void useHealing() {
@@ -248,7 +260,7 @@ class Firebat3 extends Unit3 implements Unit3Action {
 
     @Override
     public void move() {
-        System.out.printf("%.3f 속도로 이동 중...\n", speed);
+        System.out.printf("%.3f 속도로 이동 중...\n\n", speed);
     }
 
     protected void useSteampack() {
