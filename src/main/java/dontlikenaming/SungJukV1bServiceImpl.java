@@ -134,6 +134,22 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
 
     public void readOneSungJuk() {
         System.out.println("성적 데이터 상세 조회");
+        System.out.print("이름을 입력하세요. ");
+        String name = input.next();
+        SungJukVO one = null;
+        for (SungJukVO sjs : sj) {
+            if(sjs != null && sjs.getName().equals(name)){
+                one = sjs; break;
+            }
+        }
+
+        if(one!=null){
+            System.out.println(one);
+        } else {
+            System.out.println("\n찾는 데이터가 없습니다!\n");
+        }
+
+/*      System.out.println("성적 데이터 상세 조회");
         System.out.print("학번을 입력하세요. ");
         int num = input.nextInt();
         final StringBuilder sb = new StringBuilder();
@@ -148,7 +164,7 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
                 .append("학점 : ").append(sj[num].getGrd()).append("\n")
                 .append("입력시간 : ").append(sj[num].getRegdate()).append("\n\n");
 
-        System.out.println(String.format(sb.toString()));
+        System.out.println(String.format(sb.toString()));*/
     }
 
     public void modifySungJuk() {
@@ -179,12 +195,6 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
         System.arraycopy(sj, num+1, destArray, num, sj.length-num-1);
 
         sj = destArray;
-
-        for (SungJukVO sungJukVO : sj) {
-            System.out.println(sungJukVO + "\n");
-        }
-
-        System.out.println(sj.length);
 
         System.out.println("작업 완료되었습니다.");
     }
