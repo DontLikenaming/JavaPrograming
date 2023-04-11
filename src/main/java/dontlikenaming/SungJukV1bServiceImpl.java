@@ -118,7 +118,7 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
     public void readSungJuk() {
         System.out.println("성적 데이터 조회\n");
         final StringBuilder sb = new StringBuilder();
-        sb.append("조회 결과\n");
+        System.out.println("조회 결과");
         for (SungJukVO sjs : sj) {
             if(sjs!=null) {
                 sb.append("학번 : ").append(sjs.getSjon()).append("\n")
@@ -130,15 +130,19 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
                 System.out.println(sb);
             }
         }
+
+        if(sb.length()==0){
+            System.out.println("데이터가 없습니다.\n");
+        }
     }
 
     public void readOneSungJuk() {
         System.out.println("성적 데이터 상세 조회");
-        System.out.print("이름을 입력하세요. ");
-        String name = input.next();
+        System.out.print("학번을 입력하세요. ");
+        String sjon = input.next();
         SungJukVO one = null;
         for (SungJukVO sjs : sj) {
-            if(sjs != null && sjs.getName().equals(name)){
+            if(sjs != null && String.valueOf(sjs.getSjon()).equals(sjon)){
                 one = sjs; break;
             }
         }
@@ -185,7 +189,17 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
     }
 
     public void removeSungJuk() {
-        System.out.println("성적 데이터 삭제\n");
+        System.out.print("학번을 입력하세요. ");
+        String sjon = input.next();
+
+        for (int i=0;i<sj.length;i++ ) {
+            if(sj[i] != null && String.valueOf(sj[i].getSjon()).equals(sjon)){
+                sj[i] = null;
+                System.out.println("\n삭제 작업이 완료되었습니다.\n");
+                break;
+            }
+        }
+/*        System.out.println("성적 데이터 삭제\n");
         System.out.print("학번을 입력하세요. ");
         int num = input.nextInt();
 
@@ -196,6 +210,6 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
 
         sj = destArray;
 
-        System.out.println("작업 완료되었습니다.");
+        System.out.println("삭제작업이 완료되었습니다.");*/
     }
 }
