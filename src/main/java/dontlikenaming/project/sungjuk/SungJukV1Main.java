@@ -1,4 +1,6 @@
-package dontlikenaming;
+package dontlikenaming.project.sungjuk;
+
+import dontlikenaming.project.sungjuk.service.SungJukV1Service;
 
 public class SungJukV1Main {
     // 성적 처리 프로그램 v1

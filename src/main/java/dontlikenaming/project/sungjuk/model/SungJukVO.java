@@ -1,4 +1,4 @@
-package dontlikenaming;
+package dontlikenaming.project.sungjuk.model;
 
 public class SungJukVO {
     private String name, regdate;

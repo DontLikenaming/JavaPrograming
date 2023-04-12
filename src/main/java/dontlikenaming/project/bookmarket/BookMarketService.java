@@ -1,4 +1,7 @@
-package dontlikenaming;
+package dontlikenaming.project.bookmarket;
+
+import dontlikenaming.project.Membership;
+
 import java.util.Scanner;
 
 public class BookMarketService {

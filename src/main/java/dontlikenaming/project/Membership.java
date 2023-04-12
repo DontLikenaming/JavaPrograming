@@ -1,4 +1,4 @@
-package dontlikenaming;
+package dontlikenaming.project;
 
 public class Membership {
     private int mno;

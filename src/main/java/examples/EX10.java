@@ -1,5 +1,5 @@
 package examples;
-import dontlikenaming.SungJukVO;
+import dontlikenaming.project.sungjuk.model.SungJukVO;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;

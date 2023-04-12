@@ -1,5 +1,4 @@
 package examples;
-import dontlikenaming.SungJukVO;
 
 
 public class EX09 {

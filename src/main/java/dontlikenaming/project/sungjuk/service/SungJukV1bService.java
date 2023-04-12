@@ -1,4 +1,6 @@
-package dontlikenaming;
+package dontlikenaming.project.sungjuk.service;
+
+import dontlikenaming.project.sungjuk.model.SungJukVO;
 
 public interface SungJukV1bService {
     String displayMenu();

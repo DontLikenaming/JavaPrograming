@@ -1,4 +1,4 @@
-package dontlikenaming;
+package dontlikenaming.project.bookmarket;
 
 public class Books {
     static final int NUM_BOOK = 3;

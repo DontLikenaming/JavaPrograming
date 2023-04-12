@@ -1,4 +1,4 @@
-package dontlikenaming;
+package dontlikenaming.project.bookmarket;
 
 public class BookMarket {
     // 실행 흐름
