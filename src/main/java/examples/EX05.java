@@ -9,7 +9,7 @@ public class EX05 {
         // 4로 나뉘어 떨어지며 100으로는 나뉘어 떨어지지 않으면 윤년
         // 400으로 나뉘어 떨어지면 윤년
 /*        Scanner input = new Scanner(System.in);
-        int year = 0, flag;
+        int year, flag;
 
         do{
             flag = 1;
@@ -20,23 +20,22 @@ public class EX05 {
                     year = input.nextInt();
                     if(year<0){
                         System.out.println("기원전 년도는 지원하지 않습니다.");
-                        continue;
-                    } else if(year>=0){
+                    } else {
                         System.out.print(year+"년은 ");
                         break;
                     }
                 }
 
                 if((year%4==0)&&(year%100!=0)||(year%400==0)){
-                    System.out.println("윤년입니다.");
+                    System.out.print("윤년입니다.");
                 } else {
-                    System.out.println("평년입니다.");
+                    System.out.print("윤년이 아닙니다.");
                 }
 
             }
             catch(InputMismatchException e){
                 flag=0;
-                sc.nextLine();
+                input.nextLine();
                 System.out.println("정수를 입력하세요");
             }
 
