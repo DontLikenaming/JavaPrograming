@@ -3,6 +3,8 @@ package dontlikenaming;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class C19Package {
     public static void main(String[] args) {
@@ -77,7 +79,7 @@ public class C19Package {
         SimpleDateFormat sdf2 = new SimpleDateFormat(tfmt);
 
         System.out.print(sdf1.format(dateToday1)+" ");
-        System.out.print(sdf2.format(dateToday1)+"\n");*/
+        System.out.print(sdf2.format(dateToday1)+"\n");
 
 
         // 래퍼 클래스
@@ -92,6 +94,6 @@ public class C19Package {
 
         // 문자열값을 기본 자료형으로 변환 : "래퍼 클래스".parse"자료형"
         int i = Integer.parseInt("12345");
-        Integer j = Integer.parseInt("12345");
+        Integer j = Integer.parseInt("12345");*/
     }
 }
