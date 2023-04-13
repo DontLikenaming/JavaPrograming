@@ -36,15 +36,19 @@ public class C21Collection {
         System.out.print("\n");
 
         // 특정 요소 조회 : get("위치값")
-        System.out.println(names.get(1));
+        System.out.println("1번 index 조회 : "+names.get(1));
 
         // 특정 요소 변경 : set("위치값", "새로운 값")
         names.set(1, "윤아");
-        System.out.println(names.get(1));
+        System.out.println("1번 index의 값을 윤아로 수정 : "+names.get(1));
 
         // 특정 요소 제거 : remove("위치값")
         names.remove(1);
-        System.out.println(names.get(1));
+        System.out.println("1번 index의 값 삭제 후 1번 index : "+names.get(1));
+
+        // 특정 요소 제거 : remove("값")
+        names.remove("수지");
+        System.out.println("수지 삭제 후 가장 마지막 요소 : "+names.get(names.size()-1));
 
         // 데이터 검색
         // 위치로 검색 : get("위치값"), indexOf("값")
