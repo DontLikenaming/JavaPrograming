@@ -1,6 +1,8 @@
 package dontlikenaming;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class C25File {
     // 직렬화, 역직렬화
@@ -18,17 +20,25 @@ public class C25File {
                 "서울 영등포구", "1988.9.17",
                 "컴퓨터", 301);
 
+        ArrayList<Student2> stds = new ArrayList<>();
+        stds.add(std1);
+        stds.add(std2);
+
         String fname = "C:/Java/students.obj";
 
         // 직렬화
         FileOutputStream fos = null;
+        BufferedOutputStream bos = null;
         ObjectOutputStream oos = null;
 
         try{
             fos = new FileOutputStream(fname);
+            bos = new BufferedOutputStream(fos);
             oos = new ObjectOutputStream(fos);
 
             oos.writeObject(std1);      // 객체를 파일에 저장
+            oos.writeObject(std2);
+            oos.writeObject(stds);
 
         }catch (Exception ex){
             System.out.println(ex.getMessage());
@@ -36,6 +46,12 @@ public class C25File {
             if(oos!=null) {
                 try {
                     oos.close();
+                } catch (Exception ex) {}
+            }
+
+            if(bos!=null) {
+                try {
+                    bos.close();
                 } catch (Exception ex) {}
             }
 
@@ -48,14 +64,20 @@ public class C25File {
 
         // 역직렬화
         FileInputStream fis = null;
+        BufferedInputStream bis = null;
         ObjectInputStream ois = null;
-        Student2 readstds = null;
+        Student2 readstd1 = null;
+        Student2 readstd2 = null;
+        ArrayList<Student2> list = null;
 
         try{
             fis = new FileInputStream(fname);
-            ois = new ObjectInputStream(fis);
+            bis = new BufferedInputStream(fis);
+            ois = new ObjectInputStream(bis);
 
-            readstds = (Student2) ois.readObject();
+            readstd1 = (Student2) ois.readObject();
+            readstd2 = (Student2) ois.readObject();
+            list = (ArrayList) ois.readObject();
 
         }catch (Exception ex){
             System.out.println(ex.getMessage());
@@ -63,6 +85,12 @@ public class C25File {
             if(ois!=null) {
                 try {
                     ois.close();
+                } catch (Exception ex) {}
+            }
+
+            if(bis!=null) {
+                try {
+                    bis.close();
                 } catch (Exception ex) {}
             }
 
@@ -74,7 +102,18 @@ public class C25File {
         }
 
         // 역직렬화 결과 확인
-        System.out.println(readstds.getHakbun());
+        System.out.println(readstd1);
+        System.out.println(readstd2);
+        System.out.println(list);
+        System.out.println(list.get(0).getHakbun()+"\n");
+
+        System.out.println("데이터 타입 보존 여부 확인");
+        Test example = new Test();
+        System.out.print("학번의 데이터 타입은 "+example.test(list.get(0).getHakbun())+"\n");
+        System.out.print("이름의 데이터 타입은 "+example.test(list.get(0).getName()));
+
+
+
     }
 }
 
@@ -85,6 +124,9 @@ class Student2 implements Serializable {
     private String brith;
     private String dept;
     private int prof;
+
+    public Student2() {
+    }
 
     public Student2(
             int hakbun, String name, String address,
@@ -102,6 +144,10 @@ class Student2 implements Serializable {
         return hakbun;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -110,8 +156,24 @@ class Student2 implements Serializable {
                 .append(address).append(" ")
                 .append(brith).append(" ")
                 .append(dept).append(" ")
-                .append(prof).append('\n');
+                .append(prof);
 
         return sb.toString();
+    }
+}
+class Test {
+    public <T> T test(T a) {
+        T result = null;
+        if (a.getClass() == Integer.class) {
+            result = (T)"Integer";
+        } else if (a.getClass() == Double.class) {
+            result = (T)"Double";
+        } else if (a.getClass() == Float.class) {
+            result = (T) "Float";
+        } else if (a.getClass() == String.class) {
+            result = (T) "String";
+        }
+
+        return result;
     }
 }
