@@ -50,7 +50,7 @@ public class C23File {
 
         } catch (Exception ex){
             System.out.println("실패!");
-            ex.getMessage();
+            System.out.println(ex.getMessage());
         } finally {
             if(myWriter!=null) {
                 try {
@@ -80,7 +80,7 @@ public class C23File {
 
         } catch (Exception ex){
             System.out.print("실패!");
-            ex.getMessage();
+            System.out.println(ex.getMessage());
         } finally {
             if(fr1!=null){
                 try {
@@ -109,7 +109,7 @@ public class C23File {
 
         } catch (Exception ex){
             System.out.print("실패!");
-            ex.getMessage();
+            System.out.println(ex.getMessage());
         } finally {
             if(br!=null)
                 try {
