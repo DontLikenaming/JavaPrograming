@@ -25,7 +25,7 @@ public class C23File {
         String fname1 = "C:/Java/info.txt";
 /*        Scanner input = new Scanner(System.in);
         String name;
-       int height, age;
+        int height, age;
 
         System.out.print("이름 입력 : ");
         name = input.next();
@@ -36,50 +36,68 @@ public class C23File {
 
 
         File file1 = new File(fname1);
+        FileWriter myWriter = null;
+
         try {
-            FileWriter myWriter = new FileWriter(file1);
+            myWriter = new FileWriter(file1);
 
             myWriter.write("이름 : "+name+"\n");
             myWriter.write("신장 : "+height+"cm\n");
             myWriter.write("나이 : "+age+"세\n");
-            myWriter.close();
+
 
             System.out.print("\n성공!\n");
 
         } catch (Exception ex){
             System.out.println("실패!");
             ex.getMessage();
+        } finally {
+            if(myWriter!=null) {
+                try {
+                    myWriter.close();
+                } catch (Exception ex) {}
+            }
         }
 
         // 파일에 저장된 데이터 출력 1 - 문자 하나씩 읽음
         //String fname2 = "C:/Users/Fullstack/Desktop/covid19_1.csv";
-        File file2 = new File(fname1);
+        File file2;
+        FileReader fr1 = null;
         try {
-            FileReader fr1 = new FileReader(file2);
+            file2 = new File(fname1);
+            fr1 = new FileReader(file2);
             // System.out.println((char)fr.read());
             int i = 0;
 
             // 파일에서 문자를 하나씩 받아와서 출력함
             // 읽어온 문자의 아스키 코드값이 -1이 아니라면
-            while ((i=fr.read())!=-1){
+            while ((i=fr1.read())!=-1){
                 // 문자(char)로 변환해서 출력
                 System.out.print((char)i);
             }
-            fr.close();
+            fr1.close();
             System.out.print("\n성공!\n");
 
         } catch (Exception ex){
             System.out.print("실패!");
             ex.getMessage();
+        } finally {
+            if(fr1!=null){
+                try {
+                    fr1.close();
+                } catch (Exception ex) {}
+            }
         }*/
 
 
         // 파일에 저장된 데이터 출력 2 - 한 행씩 읽음
         // BufferedReader를 이용하면 입력속도를 높일 수 있음
         File file3 = new File(fname1);
+        FileReader fr2 = null;
+        BufferedReader br = null;
         try {
-            FileReader fr2 = new FileReader(file3);
-            BufferedReader br = new BufferedReader(fr2);
+            fr2 = new FileReader(file3);
+            br = new BufferedReader(fr2);
             int i = 0;
 
             while (br.ready()){     // 읽어올 데이터가 있는지 확인
@@ -87,13 +105,21 @@ public class C23File {
                 System.out.print(br.readLine()+"\n");
             }
 
-            br.close();
-            fr2.close();
             System.out.print("\n성공!\n");
 
         } catch (Exception ex){
             System.out.print("실패!");
             ex.getMessage();
+        } finally {
+            if(br!=null)
+                try {
+                    br.close();
+                } catch (Exception ex){}
+
+            if(fr2!=null)
+                try {
+                    fr2.close();
+                } catch (Exception ex){}
         }
     }
 }
