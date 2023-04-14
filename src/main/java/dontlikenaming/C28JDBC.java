@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class C28JDBC {
@@ -23,9 +22,9 @@ class Book {
     private String title;
     private String writer;
     private int price;
-    private Date regdate;
+    private String regdate;
 
-    public Book(int bookno, String title, String writer, int price, Date regdate) {
+    public Book(int bookno, String title, String writer, int price, String regdate) {
         this.bookno = bookno;
         this.title = title;
         this.writer = writer;
@@ -37,7 +36,7 @@ class Book {
     public String toString() {
         String fmt = "번호 : %d 책 제목 : %s 글쓴이 : %s 가격 : %d원 입고일자 : %s";
 
-        return String.format(fmt, bookno, title, writer, price, regdate);
+        return String.format(fmt, bookno, title, writer, price, regdate.substring(0,19));
     }
 }
 
@@ -74,7 +73,7 @@ class ReadBook {
                         rs.getString("title"),
                         rs.getString("writer"),
                         rs.getInt("price"),
-                        rs.getTimestamp("regdate"));
+                        rs.getString("regdate"));
 
                 bookdata.add(book);
             }
