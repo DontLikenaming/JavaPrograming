@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class C28JDBC {
     public static void main(String[] args) {
@@ -20,12 +23,12 @@ class Book {
     private String title;
     private String writer;
     private int price;
-    private String regdate;
+    private Date regdate;
+    List<Book> bookdata = new ArrayList<>();
 
-    public Book() {
-    }
+    public Book() {}
 
-    public Book(int bookno, String title, String writer, int price, String regdate) {
+    public Book(int bookno, String title, String writer, int price, Date regdate) {
         this.bookno = bookno;
         this.title = title;
         this.writer = writer;
@@ -45,29 +48,30 @@ class Book {
             Class.forName(DRV);
         } catch (ClassNotFoundException ex) {
             System.out.println("MariaDB용 JDBC 드라이버가 없음!");
-            System.out.println(ex);
+            System.out.println(ex.getMessage());
         }
 
         Connection conn = null;
         PreparedStatement pstmt = null;
 
         try {
-            String fmt = "\n번호 : %d 책 제목 : %s 글쓴이 : %s 가격 : %d원 입고일자 : %s";
             conn = DriverManager.getConnection(url, userid, pwd);
             pstmt = conn.prepareStatement(selectBookSQL);
 
             rs = pstmt.executeQuery();
             while (rs.next()){
-                System.out.printf(fmt,
+                Book book = new Book(
                         rs.getInt("bookno"),
                         rs.getString("title"),
                         rs.getString("writer"),
                         rs.getInt("price"),
                         rs.getTimestamp("regdate"));
+
+                bookdata.add(book);
             }
 
         } catch (SQLException ex) {
-            System.out.println("DB 접속 주소 또는 아이디/비밀번호를 확인하시오!");
+            System.out.println("DB 접속 주소 또는 아이디/비밀번호, SQL문을 확인하시오!");
             System.out.println(ex);
         } finally {
             if (rs != null) try {
@@ -82,17 +86,17 @@ class Book {
                 conn.close();
             } catch (Exception ex) {}
         }
+
+        // 도서정보 출력
+        for(Book b : bookdata){
+            System.out.println(b);
+        }
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(bookno)
-        .append(title)
-        .append(writer)
-        .append(price)
-        .append(regdate);
+        String fmt = "번호 : %d 책 제목 : %s 글쓴이 : %s 가격 : %d원 입고일자 : %s";
 
-        return sb.toString();
+        return String.format(fmt, bookno, title, writer, price, regdate);
     }
 }

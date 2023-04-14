@@ -36,7 +36,7 @@ class DBExample2 {
             Class.forName(DRV);
         } catch (ClassNotFoundException ex) {
             System.out.println("MariaDB용 JDBC 드라이버가 없음!");
-            System.out.println(ex);
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -60,8 +60,8 @@ class DBExample2 {
             int cnt = pstmt.executeUpdate();    // DML 실행 시 사용
             System.out.println("데이터 입력 확인 : "+cnt);
         } catch (SQLException ex) {
-            System.out.println("DB 접속 주소 또는 아이디/비밀번호를 확인하시오!");
-            System.out.println(ex);
+            System.out.println("DB 접속 주소 또는 아이디/비밀번호, SQL문을 확인하시오!");
+            System.out.println(ex.getMessage());
         } finally {
             if (pstmt != null) try {
                 pstmt.close();
