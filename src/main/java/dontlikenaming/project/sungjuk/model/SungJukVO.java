@@ -95,10 +95,10 @@ public class SungJukVO {
 
     @Override
     public String toString() {
-        String fmt = "학번 : %d\n이름 : %s\n" +
-                "국어점수 : %d\n영어점수 : %d\n수학점수 : %d\n" +
-                "총합 : %d\n평균 : %.1f\n" +
-                "학점 : %c\n입력시간 : %s\n";
+        String fmt = "학번 : %d, 이름 : %s, " +
+                "국어점수 : %d, 영어점수 : %d, 수학점수 : %d, " +
+                "총합 : %d, 평균 : %.1f, " +
+                "학점 : %c, 입력시간 : %s\n";
         return String.format(fmt, sjon, name,
                 kor, eng, mat, tot, avg, grd, regdate);
     }
