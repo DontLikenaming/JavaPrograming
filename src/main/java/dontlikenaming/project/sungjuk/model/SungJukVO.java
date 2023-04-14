@@ -20,6 +20,15 @@ public class SungJukVO {
         this.mat = mat;
     }
 
+    public SungJukVO(int sjon, String name, int kor, int eng, int mat, int tot, double avg, char grd, String regdate) {
+        this(sjon, name, kor, eng, mat);
+        this.mat = mat;
+        this.tot = tot;
+        this.avg = avg;
+        this.grd = grd;
+        this.regdate = regdate;
+    }
+
     public void setSjon(int sjon) {
         this.sjon = sjon;
     }
@@ -95,10 +104,10 @@ public class SungJukVO {
 
     @Override
     public String toString() {
-        String fmt = "학번 : %d, 이름 : %s, " +
-                "국어점수 : %d, 영어점수 : %d, 수학점수 : %d, " +
-                "총합 : %d, 평균 : %.1f, " +
-                "학점 : %c, 입력시간 : %s\n";
+        String fmt = "%d, %s, " +
+                "%d, %d, %d, " +
+                "%d, %.1f, " +
+                "%c, %s\n";
         return String.format(fmt, sjon, name,
                 kor, eng, mat, tot, avg, grd, regdate);
     }

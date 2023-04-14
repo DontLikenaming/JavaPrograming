@@ -22,8 +22,11 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
 
     public SungJukV3ServiceImpl() {
         input = new Scanner(System.in);
-        sj = new ArrayList<>();
         sjdao = new SungJukV3DAOImpl();
+
+        // 프로그램 시작 시 미리 파일에 저장된 데이터를
+        // 모두 읽어서 ArrayList 객체에 저장
+        sj = sjdao.loadSungJuk();
     }
 
     public int displayMenu() {
@@ -119,7 +122,10 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
             // 성적 데이터를 파일에 저장
             if(sjdao.saveSungJuk(sjs)) {System.out.println("\n저장 성공!\n");}
 
+            // 방금 추가된 성적 데이터를 sj에도 반영
+            sj.add(sjs);
             sjnum++;
+
 
     }
 
@@ -145,29 +151,27 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
     }
 
     public void readSungJuk() {
+        String fmt = "\n학번 : %d 이름 : %s 국어 : %d 영어 : %d 수학 : %d\n";
         System.out.println("성적 데이터 조회\n");
-        final StringBuilder sb = new StringBuilder();
         System.out.println("조회 결과");
         try {
             for (SungJukVO sjs : sj) {
-                sb.append("학번 : " + sjs.getSjon() + "\n")
-                        .append("이름 : " + sjs.getName() + "\n")
-                        .append("국어점수 : " + sjs.getKor() + "\n")
-                        .append("영어점수 : " + sjs.getEng() + "\n")
-                        .append("수학점수 : " + sjs.getMat() + "\n\n");
+                System.out.printf(fmt, sjs.getSjon(), sjs.getName(),
+                        sjs.getKor(), sjs.getEng(), sjs.getMat());
             }
-        } catch (NullPointerException ex){}
-
-        if(sb.length()==0){
+        } catch (NullPointerException ex) {
             System.out.println("\n데이터가 없습니다!\n");
-        } else {System.out.print(sb);}
+        }
     }
 
     public void readOneSungJuk() {
+        String fmt = "\n학번 : %d\n이름 : %s\n국어 : %d\n영어 : %d\n수학 : %d\n" +
+                "총점 : %d\n평균 : %.1f\n학점 : %s\n입력 시간 : %s\n\n";
         System.out.println("성적 데이터 상세 조회");
         System.out.print("학번을 입력하세요. ");
         String sjon = input.next();
         SungJukVO one = null;
+
         try {
             for (SungJukVO sjs : sj) {
                 if (String.valueOf(sjs.getSjon()).equals(sjon)) {
@@ -180,7 +184,11 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
         }
 
         if(one!=null){
-            System.out.printf("\n%s\n", one);
+            System.out.printf(fmt, one.getSjon(), one.getName(),
+                    one.getKor(), one.getEng(), one.getMat(),
+                    one.getTot(), one.getAvg(), one.getGrd(),
+                    one.getRegdate());
+            //System.out.printf("\n%s\n", one);
         } else {
             System.out.println("\n찾는 데이터가 없습니다!\n");
         }
