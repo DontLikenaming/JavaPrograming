@@ -12,9 +12,9 @@ import java.util.List;
 public class C28JDBC {
     public static void main(String[] args) {
         // newbooks 테이블의 모든 레코드 조회
-        Book book = new Book();
+        ReadBook readBook = new ReadBook();
 
-        book.selectAll();
+        readBook.selectAll();
     }
 }
 
@@ -24,9 +24,6 @@ class Book {
     private String writer;
     private int price;
     private Date regdate;
-    List<Book> bookdata = new ArrayList<>();
-
-    public Book() {}
 
     public Book(int bookno, String title, String writer, int price, Date regdate) {
         this.bookno = bookno;
@@ -35,6 +32,18 @@ class Book {
         this.price = price;
         this.regdate = regdate;
     }
+
+    @Override
+    public String toString() {
+        String fmt = "번호 : %d 책 제목 : %s 글쓴이 : %s 가격 : %d원 입고일자 : %s";
+
+        return String.format(fmt, bookno, title, writer, price, regdate);
+    }
+}
+
+
+class ReadBook {
+    List<Book> bookdata = new ArrayList<>();
 
     private String url = "jdbc:mariadb://fullstacks.cfgsyxlxdqdq.ap-northeast-2.rds.amazonaws.com:3306/fullstacks";
     private String DRV = "org.mariadb.jdbc.Driver";
@@ -91,12 +100,5 @@ class Book {
         for(Book b : bookdata){
             System.out.println(b);
         }
-    }
-
-    @Override
-    public String toString() {
-        String fmt = "번호 : %d 책 제목 : %s 글쓴이 : %s 가격 : %d원 입고일자 : %s";
-
-        return String.format(fmt, bookno, title, writer, price, regdate);
     }
 }

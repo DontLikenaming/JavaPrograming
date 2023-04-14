@@ -7,7 +7,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SungJukV3DAOImpl implements SungJukV3DAO{
@@ -17,6 +16,7 @@ public class SungJukV3DAOImpl implements SungJukV3DAO{
     private BufferedWriter bw = null;
     private BufferedReader br = null;
 
+    // 입력한 성적 데이터를 파일에 저장
     @Override
     public boolean saveSungJuk(SungJukVO sjs) {
 
@@ -48,6 +48,8 @@ public class SungJukV3DAOImpl implements SungJukV3DAO{
         return true;
     }
 
+    // 파일에 저장된 성적 데이터들을 모두 읽어서
+    // ArrayList 객체에 저장하고 리턴
     @Override
     public List<SungJukVO> loadSungJuk() {
         List<SungJukVO> sjdata = new ArrayList<>();

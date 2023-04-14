@@ -2,7 +2,6 @@ package dontlikenaming;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class C25File {
     // 직렬화, 역직렬화
@@ -108,11 +107,9 @@ public class C25File {
         System.out.println(list.get(0).getHakbun()+"\n");
 
         System.out.println("데이터 타입 보존 여부 확인");
-        Test example = new Test();
-        System.out.print("학번의 데이터 타입은 "+example.test(list.get(0).getHakbun())+"\n");
-        System.out.print("이름의 데이터 타입은 "+example.test(list.get(0).getName()));
-
-
+        Check example = new Check();
+        System.out.print("학번의 데이터 타입은 "+example.Check(list.get(0).getHakbun())+"\n");
+        System.out.print("이름의 데이터 타입은 "+example.Check(list.get(0).getName()));
 
     }
 }
@@ -124,9 +121,6 @@ class Student2 implements Serializable {
     private String brith;
     private String dept;
     private int prof;
-
-    public Student2() {
-    }
 
     public Student2(
             int hakbun, String name, String address,
@@ -161,8 +155,8 @@ class Student2 implements Serializable {
         return sb.toString();
     }
 }
-class Test {
-    public <T> T test(T a) {
+class Check {
+    public <T> T Check(T a) {
         T result = null;
         if (a.getClass() == Integer.class) {
             result = (T)"Integer";
