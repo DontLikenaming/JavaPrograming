@@ -1,31 +1,29 @@
 package dontlikenaming.project.sungjuk.service;
 
+import dontlikenaming.project.sungjuk.dao.SungJukV3DAO;
+import dontlikenaming.project.sungjuk.dao.SungJukV3DAOImpl;
 import dontlikenaming.project.sungjuk.model.SungJukVO;
 
-import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 
 public class SungJukV3ServiceImpl implements SungJukV1cService {
     private Scanner input = null;
     private List<SungJukVO> sj = null;
     private int sjnum = 0;
+    private SungJukV3DAO sjdao = null;
 
-    private String fname = "c:/Java/sungjukv3.dat";
-    private FileWriter fw = null;
-    private FileReader fr = null;
-    private BufferedWriter bw = null;
-    private BufferedReader br = null;
 
     public SungJukV3ServiceImpl() {
         input = new Scanner(System.in);
         sj = new ArrayList<>();
+        sjdao = new SungJukV3DAOImpl();
     }
 
     public int displayMenu() {
@@ -118,36 +116,10 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
             SungJukVO sjs = new SungJukVO(sjnum, name, kor, eng, mat);
             computeSungJuk(sjs);
 
-            // 생성된 성적 데이터를 파일에 저장
-        try {
-            // 파일 기록 시 추가(append 기능 활성화)
-            fw = new FileWriter(fname, true);
-            bw = new BufferedWriter(fw);
-
-            bw.write(sjs.toString());
-
-            System.out.print("\n저장 성공!\n");
-
-        } catch (Exception ex){
-            System.out.println("성적 데이터 저장 중 오류 발생!");
-            System.out.println(ex.getMessage());
-        } finally {
-            if(bw!=null) {
-                try {
-                    bw.close();
-                } catch (Exception ex) {}
-            }
-
-            if(fw!=null) {
-                try {
-                    fw.close();
-                } catch (Exception ex) {}
-            }
-        }
+            // 성적 데이터를 파일에 저장
+            if(sjdao.saveSungJuk(sjs)) {System.out.println("\n저장 성공!\n");}
 
             sjnum++;
-
-            System.out.print("\n");
 
     }
 
