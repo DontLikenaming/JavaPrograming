@@ -67,8 +67,6 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
     public void processMenu(int selectMenu) {
         switch (selectMenu) {
             case 0:
-                // ArrayList에 저장된 성적 데이터를 파일에 기록
-                sjdao.writeSunJuk(sj);
                 System.out.println("프로그램을 종료합니다.");
                 System.exit(0);
                 break;
@@ -220,10 +218,13 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
                     computeSungJuk(newOne);
                     sj.set(i, newOne);
 
-                    System.out.println("\n수정 작업이 완료되었습니다.\n");
                     break;
                 }
             }
+
+            // ArrayList에 저장된 성적 데이터를 파일에 기록
+            sjdao.writeSunJuk(sj);
+            System.out.println("수정 작업이 완료되었습니다.");
         }
         catch (InputMismatchException ex){
             input.nextLine();
@@ -243,6 +244,10 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
                 count++;
             }
         }
+
+        // ArrayList에 저장된 성적 데이터를 파일에 기록
+        sjdao.writeSunJuk(sj);
+
         if(count!=0) System.out.println("삭제작업이 완료되었습니다.");
         else {System.out.println("해당 데이터가 없습니다.");}
     }
