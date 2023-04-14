@@ -7,4 +7,6 @@ public interface SungJukV3DAO {
     boolean saveSungJuk(SungJukVO sjs);
 
     List<SungJukVO> loadSungJuk();
+
+    void writeSunJuk(List<SungJukVO> sj);
 }

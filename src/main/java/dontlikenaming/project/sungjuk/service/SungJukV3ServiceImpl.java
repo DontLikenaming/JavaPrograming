@@ -67,6 +67,8 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
     public void processMenu(int selectMenu) {
         switch (selectMenu) {
             case 0:
+                // ArrayList에 저장된 성적 데이터를 파일에 기록
+                sjdao.writeSunJuk(sj);
                 System.out.println("프로그램을 종료합니다.");
                 System.exit(0);
                 break;
@@ -159,6 +161,8 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
                 System.out.printf(fmt, sjs.getSjon(), sjs.getName(),
                         sjs.getKor(), sjs.getEng(), sjs.getMat());
             }
+            System.out.print("\n");
+
         } catch (NullPointerException ex) {
             System.out.println("\n데이터가 없습니다!\n");
         }
@@ -231,13 +235,15 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
         System.out.println("성적 데이터 삭제\n");
         System.out.print("학번을 입력하세요. ");
         int sjon = input.nextInt();
+        int count = 0;
 
         for(int i=0;i<sj.size();i++){
             if(sj.get(i).getSjon()==sjon){
                 sj.remove(sj.get(i));
+                count++;
             }
         }
-
-        System.out.println("삭제작업이 완료되었습니다.");
+        if(count!=0) System.out.println("삭제작업이 완료되었습니다.");
+        else {System.out.println("해당 데이터가 없습니다.");}
     }
 }
