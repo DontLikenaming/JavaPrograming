@@ -7,10 +7,9 @@ import java.util.Scanner;
 
 public class C29JDBC {
     public static void main(String[] args) {
-        // newbooks 테이블의 모든 레코드 조회
         ReadBook2 readBook2 = new ReadBook2();
 
-        readBook2.selectAll();
+        readBook2.selectOne();
     }
 }
 
@@ -47,7 +46,7 @@ class ReadBook2 {
 
     private ResultSet rs;
 
-    void selectAll() {
+    void selectOne() {
         List<Book2> bookdata2 = new ArrayList<>();
         String findbook = null;
 
