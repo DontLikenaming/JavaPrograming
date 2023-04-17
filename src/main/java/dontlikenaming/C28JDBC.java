@@ -1,7 +1,6 @@
 package dontlikenaming;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
@@ -11,9 +10,9 @@ import java.util.List;
 public class C28JDBC {
     public static void main(String[] args) {
         // newbooks 테이블의 모든 레코드 조회
-        ReadBook readBook = new ReadBook();
+        ReadBook2 readBook2 = new ReadBook2();
 
-        readBook.selectAll();
+        readBook2.selectAll();
     }
 }
 
@@ -41,29 +40,17 @@ class Book {
 }
 
 
-class ReadBook {
+class ReadBook2 {
     List<Book> bookdata = new ArrayList<>();
 
-    private String url = "jdbc:mariadb://fullstacks.cfgsyxlxdqdq.ap-northeast-2.rds.amazonaws.com:3306/fullstacks";
-    private String DRV = "org.mariadb.jdbc.Driver";
-    private String userid = "admin";
-    private String pwd = "fullstack_2023";
     private String selectBookSQL = " select * from newbooks order by bookno desc ";
     private ResultSet rs;
 
     void selectAll() {
-        try {
-            Class.forName(DRV);
-        } catch (ClassNotFoundException ex) {
-            System.out.println("MariaDB용 JDBC 드라이버가 없음!");
-            System.out.println(ex.getMessage());
-        }
-
-        Connection conn = null;
+        Connection conn = C32JDBCUtil.makeConn();
         PreparedStatement pstmt = null;
 
         try {
-            conn = DriverManager.getConnection(url, userid, pwd);
             pstmt = conn.prepareStatement(selectBookSQL);
 
             rs = pstmt.executeQuery();
@@ -82,17 +69,10 @@ class ReadBook {
             System.out.println("DB 접속 주소 또는 아이디/비밀번호, SQL문을 확인하시오!");
             System.out.println(ex);
         } finally {
-            if (rs != null) try {
-                rs.close();
-            } catch (Exception ex) {}
-
-            if (pstmt != null) try {
-                pstmt.close();
-            } catch (Exception ex) {}
-
-            if (conn != null) try {
-                conn.close();
-            } catch (Exception ex) {}
+            // static으로 선언된 메서드는
+            // 객체 생성 없이 바로 호출 가능
+            // 단, 클래스 이름.메서드 이름으로 호출해야 함
+            C32JDBCUtil.closeConn(rs, pstmt, conn);
         }
 
         // 도서정보 출력

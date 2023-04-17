@@ -16,7 +16,7 @@ public class C26JDBC {
     // 이것을 'JDBC 드라이버'라고 함
     // JDBC 드라이버들은 제조사 홈페이지에서
     // 내려받을 수 있음
-    public static void main(String[] args) {/*
+    public static void main(String[] args) {
         // 1. JDBC 드라이버를 메모리에 적재
         try {
             Class.forName("org.mariadb.jdbc.Driver");
@@ -27,10 +27,10 @@ public class C26JDBC {
         }
 
         // 2. 데이터베이스 서버에 접속하기
-        Connection conn;
-        String url;
-        String userid;
-        String pwd;
+        Connection conn = null;
+        String url = null;
+        String userid = null;
+        String pwd = null;
 
         try {
             System.out.println("데이터베이스 연결 준비...");
@@ -43,7 +43,7 @@ public class C26JDBC {
             System.out.println(ex);
         } finally {
             if (conn != null) try {conn.close();} catch (Exception ex) {}
-        }*/
+        }
     }
 }
 
