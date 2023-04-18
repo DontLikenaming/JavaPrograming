@@ -81,7 +81,7 @@ public class SungJukV1Service {
     private void newSunJuck() {
             System.out.println("성적 데이터 입력\n");
             sj[idx] = new SungJukVO();
-            sj[idx].setSjon(idx);
+            sj[idx].setSjno(idx);
             System.out.print("이름을 입력하세요. ");
             sj[idx].setName(input.next());
             System.out.print("국어점수를 입력하세요. ");
@@ -122,7 +122,7 @@ public class SungJukV1Service {
         sb.append("조회 결과\n");
         for (SungJukVO sjs : sj) {
             if(sjs!=null) {
-                sb.append("학번 : ").append(sjs.getSjon()).append("\n")
+                sb.append("학번 : ").append(sjs.getSjno()).append("\n")
                         .append("이름 : ").append(sjs.getName()).append("\n")
                         .append("국어점수 : ").append(sjs.getKor()).append("\n")
                         .append("영어점수 : ").append(sjs.getEng()).append("\n")
@@ -139,7 +139,7 @@ public class SungJukV1Service {
         int num = input.nextInt();
         final StringBuilder sb = new StringBuilder();
         sb.append("조회 결과\n")
-                .append("학번 : ").append(sj[num].getSjon()).append("\n")
+                .append("학번 : ").append(sj[num].getSjno()).append("\n")
                 .append("이름 : ").append(sj[num].getName()).append("\n")
                 .append("국어 점수 : ").append(sj[num].getKor()).append("\n")
                 .append("영어 점수 : ").append(sj[num].getEng()).append("\n")

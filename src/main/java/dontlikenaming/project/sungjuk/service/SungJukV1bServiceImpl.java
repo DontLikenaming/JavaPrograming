@@ -127,7 +127,7 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
         System.out.println("조회 결과");
         for (SungJukVO sjs : sj) {
             if(sjs!=null) {
-                sb.append("학번 : ").append(sjs.getSjon()).append("\n")
+                sb.append("학번 : ").append(sjs.getSjno()).append("\n")
                         .append("이름 : ").append(sjs.getName()).append("\n")
                         .append("국어점수 : ").append(sjs.getKor()).append("\n")
                         .append("영어점수 : ").append(sjs.getEng()).append("\n")
@@ -148,7 +148,7 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
         String sjon = input.next();
         SungJukVO one = null;
         for (SungJukVO sjs : sj) {
-            if(sjs != null && String.valueOf(sjs.getSjon()).equals(sjon)){
+            if(sjs != null && String.valueOf(sjs.getSjno()).equals(sjon)){
                 one = sjs; break;
             }
         }
@@ -184,7 +184,7 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
         int check = 0;
 
         for (int i=0;i<sj.length;i++ ) {
-            if(sj[i] != null && String.valueOf(sj[i].getSjon()).equals(sjon)){
+            if(sj[i] != null && String.valueOf(sj[i].getSjno()).equals(sjon)){
                 System.out.println("이름을 입력하세요. 기존 이름 : "+sj[i].getName());
                 String name = input.next();
                 System.out.println("국어점수를 입력하세요. 기존 점수 : "+sj[i].getKor());
@@ -229,7 +229,7 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
         int check = 0;
 
         for (int i=0;i<sj.length;i++ ) {
-            if(sj[i] != null && String.valueOf(sj[i].getSjon()).equals(sjon)){
+            if(sj[i] != null && String.valueOf(sj[i].getSjno()).equals(sjon)){
                 sj[i] = null;
                 System.out.println("\n삭제 작업이 완료되었습니다.\n");
                 check++;

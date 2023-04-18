@@ -143,7 +143,7 @@ public class SungJukV2ServiceImpl implements SungJukV1cService {
         System.out.println("조회 결과");
         try {
             for (SungJukVO sjs : sj) {
-                sb.append("학번 : " + sjs.getSjon() + "\n")
+                sb.append("학번 : " + sjs.getSjno() + "\n")
                         .append("이름 : " + sjs.getName() + "\n")
                         .append("국어점수 : " + sjs.getKor() + "\n")
                         .append("영어점수 : " + sjs.getEng() + "\n")
@@ -163,7 +163,7 @@ public class SungJukV2ServiceImpl implements SungJukV1cService {
         SungJukVO one = null;
         try {
             for (SungJukVO sjs : sj) {
-                if (String.valueOf(sjs.getSjon()).equals(sjon)) {
+                if (String.valueOf(sjs.getSjno()).equals(sjon)) {
                     one = sjs;
                     break;
                 }
@@ -186,7 +186,7 @@ public class SungJukV2ServiceImpl implements SungJukV1cService {
 
         try {
             for(int i=0;i<sj.size();i++){
-                if (sj.get(i).getSjon()==sjon) {
+                if (sj.get(i).getSjno()==sjon) {
                     System.out.println("이름을 입력하세요. 기존 이름 : " + sj.get(i).getName());
                     String name = input.next();
                     System.out.println("국어점수를 입력하세요. 기존 점수 : " + sj.get(i).getKor());
@@ -218,7 +218,7 @@ public class SungJukV2ServiceImpl implements SungJukV1cService {
         int sjon = input.nextInt();
 
         for(int i=0;i<sj.size();i++){
-            if(sj.get(i).getSjon()==sjon){
+            if(sj.get(i).getSjno()==sjon){
                 sj.remove(sj.get(i));
             }
         }

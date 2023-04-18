@@ -18,7 +18,7 @@ public class EX10 {
     public static void readSungJuk(SungJukVO sj) {
         Scanner input = new Scanner(System.in);
         System.out.println("학번");
-        sj.setSjon(input.nextInt());
+        sj.setSjno(input.nextInt());
         System.out.println("이름");
         sj.setName(input.next());
         System.out.println("국어점수");

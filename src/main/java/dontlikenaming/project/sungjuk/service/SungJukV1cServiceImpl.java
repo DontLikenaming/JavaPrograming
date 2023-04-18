@@ -150,7 +150,7 @@ public class SungJukV1cServiceImpl implements SungJukV1cService {
         System.out.println("조회 결과");
         try {
             for (SungJukVO sjs : sj) {
-                sb.append("학번 : " + sjs.getSjon() + "\n")
+                sb.append("학번 : " + sjs.getSjno() + "\n")
                         .append("이름 : " + sjs.getName() + "\n")
                         .append("국어점수 : " + sjs.getKor() + "\n")
                         .append("영어점수 : " + sjs.getEng() + "\n")
@@ -170,7 +170,7 @@ public class SungJukV1cServiceImpl implements SungJukV1cService {
         SungJukVO one = null;
         try {
             for (SungJukVO sjs : sj) {
-                if (String.valueOf(sjs.getSjon()).equals(sjon)) {
+                if (String.valueOf(sjs.getSjno()).equals(sjon)) {
                     one = sjs;
                     break;
                 }
@@ -194,7 +194,7 @@ public class SungJukV1cServiceImpl implements SungJukV1cService {
 
         try {
             for (int i = 0; i < sj.length; i++) {
-                if (sj[i].getSjon()==sjon) {
+                if (sj[i].getSjno()==sjon) {
                     System.out.println("이름을 입력하세요. 기존 이름 : " + sj[i].getName());
                     String name = input.next();
                     System.out.println("국어점수를 입력하세요. 기존 점수 : " + sj[i].getKor());
@@ -249,7 +249,7 @@ public class SungJukV1cServiceImpl implements SungJukV1cService {
 
         SungJukVO[] temp = new SungJukVO[sj.length];
         for(int i=0;i<sj.length-1;i++){
-            if(sj[i].getSjon()<sjon){
+            if(sj[i].getSjno()<sjon){
                 temp[i] = sj[i];
             } else {
                 temp[i] = sj[i+1];

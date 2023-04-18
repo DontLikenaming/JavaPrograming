@@ -12,18 +12,18 @@ public class SungJukV4DAOImpl implements SungJukV4DAO{
     private String insertSjSQL = " insert into sungjuk" +
             " (name, kor, eng ,mat, tot, avg, grd) VALUES (?, ?, ?, ?, ?, ?, ?) ";
     private String selectSjSQL = " select * from sungjuk " +
-            " order by sjon asc ";
+            " order by sjno asc ";
     private String selectOneSjSQL = " select * from sungjuk " +
-            " where sjon = ? ";
+            " where sjno = ? ";
     private String updateSjSQL = " update sungjuk set " +
             " name = ?, kor = ?, eng = ?, mat = ?," +
             " tot = ?, avg = ?, grd = ? " +
-            " where sjon = ? ";
+            " where sjno = ? ";
     private String deleteSjSQL = " delete from sungjuk where " +
-            " sjon = ? ";
+            " sjno = ? ";
 
 /*    private String name, regdate;
-    private int sjon, kor, eng, mat, tot;
+    private int sjno, kor, eng, mat, tot;
     private double avg;
     private char grd;*/
     private static SungJukVO instance = new SungJukVO();
@@ -70,7 +70,7 @@ public class SungJukV4DAOImpl implements SungJukV4DAO{
 
             while (rs.next()) {
                 SungJukVO sj = new SungJukVO(
-                        rs.getInt("sjon"),
+                        rs.getInt("sjno"),
                         rs.getString("name"),
                         rs.getInt("kor"),
                         rs.getInt("eng"),
@@ -106,14 +106,14 @@ public class SungJukV4DAOImpl implements SungJukV4DAO{
 
             if(rs.next()) {
                 sj = new SungJukVO(
-                        rs.getInt("sjon"),
+                        rs.getInt("sjno"),
                         rs.getString("name"),
                         rs.getInt("kor"),
                         rs.getInt("eng"),
                         rs.getInt("mat"),
                         rs.getInt("tot"),
                         rs.getDouble("avg"),
-                        (Character) rs.getObject("grd"),
+                        rs.getString("grd").charAt(0),
                         rs.getString("regdate")
                 );
             }

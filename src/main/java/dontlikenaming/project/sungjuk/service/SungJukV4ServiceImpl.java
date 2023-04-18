@@ -159,8 +159,8 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
         System.out.println("성적 데이터 조회\n");
         System.out.println("조회 결과");
         try {
-            for (SungJukVO sjs : sj) {
-                System.out.printf(fmt, sjs.getSjon(), sjs.getName(),
+            for (SungJukVO sjs : sjdao.selectSungJuk()) {
+                System.out.printf(fmt, sjs.getSjno(), sjs.getName(),
                         sjs.getKor(), sjs.getEng(), sjs.getMat());
             }
             System.out.print("\n");
@@ -175,29 +175,24 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
                 "총점 : %d\n평균 : %.1f\n학점 : %s\n입력 시간 : %s\n\n";
         System.out.println("성적 데이터 상세 조회");
         System.out.print("학번을 입력하세요. ");
-        String sjon = input.next();
+        int sjon = input.nextInt();
         SungJukVO one = null;
 
         try {
-            for (SungJukVO sjs : sj) {
-                if (String.valueOf(sjs.getSjon()).equals(sjon)) {
-                    one = sjs;
-                    break;
-                }
+            one = sjdao.selectOneSungJuk(sjon);
+            if(one!=null){
+                System.out.printf(fmt, one.getSjno(), one.getName(),
+                        one.getKor(), one.getEng(), one.getMat(),
+                        one.getTot(), one.getAvg(), one.getGrd(),
+                        one.getRegdate());
+            } else {
+                System.out.println("\n찾는 데이터가 없습니다!\n");
             }
+
         } catch (NullPointerException ex){
             return;
         }
 
-        if(one!=null){
-            System.out.printf(fmt, one.getSjon(), one.getName(),
-                    one.getKor(), one.getEng(), one.getMat(),
-                    one.getTot(), one.getAvg(), one.getGrd(),
-                    one.getRegdate());
-            //System.out.printf("\n%s\n", one);
-        } else {
-            System.out.println("\n찾는 데이터가 없습니다!\n");
-        }
     }
 
     public void modifySungJuk() {
@@ -207,7 +202,7 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
 
         try {
             for(int i=0;i<sj.size();i++){
-                if (sj.get(i).getSjon()==sjon) {
+                if (sj.get(i).getSjno()==sjon) {
                     System.out.println("이름을 입력하세요. 기존 이름 : " + sj.get(i).getName());
                     String name = input.next();
                     System.out.println("국어점수를 입력하세요. 기존 점수 : " + sj.get(i).getKor());

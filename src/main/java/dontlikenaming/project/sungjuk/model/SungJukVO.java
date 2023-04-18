@@ -2,7 +2,7 @@ package dontlikenaming.project.sungjuk.model;
 
 public class SungJukVO {
     private String name, regdate;
-    private int sjon, kor, eng, mat, tot;
+    private int sjno, kor, eng, mat, tot;
     private double avg;
     private char grd;
 
@@ -10,16 +10,16 @@ public class SungJukVO {
     public SungJukVO() {
     }
 
-    public SungJukVO(int sjon, String name, int kor, int eng, int mat){
-        this.sjon = sjon;
+    public SungJukVO(int sjno, String name, int kor, int eng, int mat){
+        this.sjno = sjno;
         this.name = name;
         this.kor = kor;
         this.eng = eng;
         this.mat = mat;
     }
 
-    public SungJukVO(int sjon, String name, int kor, int eng, int mat, int tot, double avg, char grd, String regdate) {
-        this(sjon, name, kor, eng, mat);
+    public SungJukVO(int sjno, String name, int kor, int eng, int mat, int tot, double avg, char grd, String regdate) {
+        this(sjno, name, kor, eng, mat);
         this.mat = mat;
         this.tot = tot;
         this.avg = avg;
@@ -43,12 +43,12 @@ public class SungJukVO {
         this.regdate = regdate;
     }
 
-    public void setSjon(int sjon) {
-        this.sjon = sjon;
+    public void setSjno(int sjno) {
+        this.sjno = sjno;
     }
 
-    public int getSjon() {
-        return sjon;
+    public int getSjno() {
+        return sjno;
     }
 
     public void setName(String name) {
@@ -112,7 +112,7 @@ public class SungJukVO {
     }
 
     public String getRegdate() {
-        return regdate;
+        return regdate.substring(0,19);
     }
 
 
@@ -122,7 +122,7 @@ public class SungJukVO {
                 "%d, %d, %d, " +
                 "%d, %.1f, " +
                 "%c, %s\n";
-        return String.format(fmt, sjon, name,
-                kor, eng, mat, tot, avg, grd, regdate);
+        return String.format(fmt, sjno, name,
+                kor, eng, mat, tot, avg, grd, regdate.substring(0,19));
     }
 }
