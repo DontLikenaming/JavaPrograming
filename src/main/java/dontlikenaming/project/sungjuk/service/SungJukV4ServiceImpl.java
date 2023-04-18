@@ -8,21 +8,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 
 public class SungJukV4ServiceImpl implements SungJukV1cService {
     private Scanner input = null;
-    private List<SungJukVO> sj = null;
-    private int sjnum = 0;
     private SungJukV4DAO sjdao = null;
 
 
     public SungJukV4ServiceImpl() {
         input = new Scanner(System.in);
         sjdao = new SungJukV4DAOImpl();
-
     }
 
     public int displayMenu() {
