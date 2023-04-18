@@ -176,22 +176,15 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
         System.out.println("성적 데이터 상세 조회");
         System.out.print("학번을 입력하세요. ");
         int sjon = input.nextInt();
-        SungJukVO one = null;
-
-        try {
-            one = sjdao.selectOneSungJuk(sjon);
-            if(one!=null){
-                System.out.printf(fmt, one.getSjno(), one.getName(),
-                        one.getKor(), one.getEng(), one.getMat(),
-                        one.getTot(), one.getAvg(), one.getGrd(),
-                        one.getRegdate());
+        SungJukVO sj = sjdao.selectOneSungJuk(sjon);
+            if(sj!=null){
+                System.out.printf(fmt, sj.getSjno(), sj.getName(),
+                        sj.getKor(), sj.getEng(), sj.getMat(),
+                        sj.getTot(), sj.getAvg(), sj.getGrd(),
+                        sj.getRegdate());
             } else {
                 System.out.println("\n찾는 데이터가 없습니다!\n");
             }
-
-        } catch (NullPointerException ex){
-            return;
-        }
 
     }
 
@@ -199,26 +192,26 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
         System.out.println("성적 데이터 수정\n");
         System.out.print("학번을 입력하세요. ");
         int sjon = input.nextInt();
-
+        SungJukVO sj = sjdao.selectOneSungJuk(sjon);
         try {
-            for(int i=0;i<sj.size();i++){
-                if (sj.get(i).getSjno()==sjon) {
-                    System.out.println("이름을 입력하세요. 기존 이름 : " + sj.get(i).getName());
-                    String name = input.next();
-                    System.out.println("국어점수를 입력하세요. 기존 점수 : " + sj.get(i).getKor());
-                    int kor = input.nextInt();
-                    System.out.println("영어점수를 입력하세요. 기존 점수 : " + sj.get(i).getEng());
-                    int eng = input.nextInt();
-                    System.out.println("수학점수를 입력하세요. 기존 점수 : " + sj.get(i).getMat());
-                    int mat = input.nextInt();
-                    System.out.print("\n");
+            if (sj != null) {
+                System.out.println("이름을 입력하세요. 기존 이름 : " + sj.getName());
+                String name = input.next();
+                System.out.println("국어점수를 입력하세요. 기존 점수 : " + sj.getKor());
+                int kor = input.nextInt();
+                System.out.println("영어점수를 입력하세요. 기존 점수 : " + sj.getEng());
+                int eng = input.nextInt();
+                System.out.println("수학점수를 입력하세요. 기존 점수 : " + sj.getMat());
+                int mat = input.nextInt();
+                System.out.print("\n");
 
-                    SungJukVO newOne = new SungJukVO(name, kor, eng, mat);
-                    computeSungJuk(newOne);
-                    sj.set(i, newOne);
+                SungJukVO newOne = new SungJukVO(sjon, name, kor, eng, mat);
+                computeSungJuk(newOne);
 
-                    break;
-                }
+                if (sjdao.updateSungJuk(newOne) > 0) System.out.println("데이터 수정 완료!");
+
+            } else {
+                System.out.println("데이터가 없습니다!");
             }
         }
         catch (InputMismatchException ex){
@@ -231,9 +224,9 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
         System.out.println("성적 데이터 삭제\n");
         System.out.print("학번을 입력하세요. ");
         int sjon = input.nextInt();
-        int count = 0;
+        int cnt = sjdao.deleteSungJuk(sjon);
 
-        if(count!=0) System.out.println("삭제작업이 완료되었습니다.");
+        if(cnt!=0) System.out.println("삭제작업이 완료되었습니다.");
         else {System.out.println("해당 데이터가 없습니다.");}
     }
 }

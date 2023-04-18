@@ -22,12 +22,6 @@ public class SungJukV4DAOImpl implements SungJukV4DAO{
     private String deleteSjSQL = " delete from sungjuk where " +
             " sjno = ? ";
 
-/*    private String name, regdate;
-    private int sjno, kor, eng, mat, tot;
-    private double avg;
-    private char grd;*/
-    private static SungJukVO instance = new SungJukVO();
-
     @Override
     public int insertSungJuk(SungJukVO sjs) {
         Connection conn = null;
@@ -130,10 +124,21 @@ public class SungJukV4DAOImpl implements SungJukV4DAO{
     public int updateSungJuk(SungJukVO sjs) {
         Connection conn = null;
         PreparedStatement pstmt = null;
+        int cnt = -1;
 
         try{
             conn = MariaDB.makeConn();
             pstmt = conn.prepareStatement(updateSjSQL);
+            pstmt.setString(1, sjs.getName());
+            pstmt.setInt(2, sjs.getKor());
+            pstmt.setInt(3, sjs.getEng());
+            pstmt.setInt(4, sjs.getMat());
+            pstmt.setInt(5, sjs.getTot());
+            pstmt.setDouble(6, sjs.getAvg());
+            pstmt.setString(7, sjs.getGrd()+"");
+            pstmt.setInt(8, sjs.getSjno());
+
+            cnt = pstmt.executeUpdate();
 
         }catch (Exception ex){
             System.out.println("updateSungJuk 에러!");
@@ -141,17 +146,21 @@ public class SungJukV4DAOImpl implements SungJukV4DAO{
         }finally {
             MariaDB.closeConn(null, pstmt, conn);
         }
-        return 0;
+        return cnt;
     }
 
     @Override
     public int deleteSungJuk(int sjnum) {
         Connection conn = null;
         PreparedStatement pstmt = null;
+        int cnt = -1;
 
         try{
             conn = MariaDB.makeConn();
             pstmt = conn.prepareStatement(deleteSjSQL);
+            pstmt.setInt(1, sjnum);
+
+            cnt = pstmt.executeUpdate();
 
         }catch (Exception ex){
             System.out.println("deleteSungJuk 에러!");
@@ -159,6 +168,6 @@ public class SungJukV4DAOImpl implements SungJukV4DAO{
         }finally {
             MariaDB.closeConn(null, pstmt, conn);
         }
-        return 0;
+        return cnt;
     }
 }
