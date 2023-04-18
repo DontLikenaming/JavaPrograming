@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class C33JDBC {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        /*System.out.println("사원 등록을 진행합니다.");
+        System.out.println("사원 등록을 진행합니다.");
 
         System.out.print("사원번호 입력 : ");
         int empno = input.nextInt();
@@ -29,7 +29,7 @@ public class C33JDBC {
         System.out.print("전화번호 입력 : ");
         String phone = input.next();
 
-        System.out.print("입사일 입력 : ");
+/*        System.out.print("입사일 입력 : ");
         String hdate = input.next();
 
         System.out.print("직책 입력 : ");
@@ -48,10 +48,12 @@ public class C33JDBC {
         int deptno = input.nextInt();
 
         EMPVO emp = new EMPVO(empno, fname, lname, email, phone,
-                hdate, jobid, sal, comm, mgrid, deptno);
+                hdate, jobid, sal, comm, mgrid, deptno);*/
+
+        EMPVO emp2 = new EMPVO(empno, fname, lname, email, phone);
 
 
-        if(EMPDAOImpl.insertEmp(emp)>0){
+        /*if(EMPDAOImpl.insertEmp(emp)>0){
             System.out.println("입력 성공!");
         } else {
             System.out.println("입력 실패");
@@ -65,7 +67,7 @@ public class C33JDBC {
                     emp.getLname(), emp.getEmail(), emp.getPhone(),
                     emp.getHdate(), emp.getJobid(), emp.getSal(),
                     emp.getComm(), emp.getMgrid(), emp.getDeptno());
-        }*/
+        }
 
         System.out.print("조회할 사원 번호 입력 : ");
         int empno = input.nextInt();
@@ -75,11 +77,17 @@ public class C33JDBC {
         else {System.out.println("해당 데이터가 존재하지 않습니다.");}
 
         System.out.print("삭제할 사원 번호 입력 : ");
-        empno = input.nextInt();
+        int empno = input.nextInt();
 
         int delCheck = EMPDAOImpl.deleteEmp(empno);
         if(delCheck!=0) System.out.println("사원 정보 삭제 성공!!");
-        else {System.out.println("해당 데이터가 존재하지 않습니다.");}
+        else {System.out.println("해당 데이터가 존재하지 않습니다.");}*/
+
+        if(EMPDAOImpl.updateEmp(emp2)>0){
+            System.out.println("입력 성공!");
+        } else {
+            System.out.println("입력 실패");
+        }
 
     }
 }
@@ -114,6 +122,14 @@ class EMPVO {
         this.comm = comm;
         this.mgrid = mgrid;
         this.deptno = deptno;
+    }
+
+    public EMPVO(int empno, String fname, String lname, String email, String phone) {
+        this.empno = empno;
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.phone = phone;
     }
 
     public int getEmpno() {
@@ -230,7 +246,7 @@ class EMPDAOImpl {
     private static String deleteEmpSQL = " delete from employees where " +
             " EMPLOYEE_ID = ? ";
     private static String updateEmpSQL = " update employees set " +
-            " (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER) = (?, ?, ?, ?) " +
+            " FIRST_NAME = ?, LAST_NAME = ?, EMAIL = ?, PHONE_NUMBER = ? " +
             " where EMPLOYEE_ID = ? ";
 
 
@@ -368,6 +384,7 @@ class EMPDAOImpl {
     public static int updateEmp(EMPVO emp) {
         Connection conn = null;
         PreparedStatement pstmt = null;
+        int cnt = -1;
 
         try{
             conn = C34JDBCUtil.makeConn();
@@ -378,12 +395,15 @@ class EMPDAOImpl {
             pstmt.setString(4, emp.getPhone());
             pstmt.setInt(5, emp.getEmpno());
 
+            cnt = pstmt.executeUpdate();
+            System.out.println("데이터 입력 확인 : "+cnt);
+
         } catch (Exception ex) {
         System.out.println("updateEmp 에러!");
         System.out.println(ex.getMessage());
     } finally {
         C34JDBCUtil.closeConn(null, pstmt, conn);
     }
-        return 0;
+        return cnt;
     }
 }
