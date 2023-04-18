@@ -16,7 +16,7 @@ public class SungJukV4DAOImpl implements SungJukV4DAO{
     private String selectOneSjSQL = " select * from sungjuk " +
             " where sjno = ? ";
     private String updateSjSQL = " update sungjuk set " +
-            " name = ?, kor = ?, eng = ?, mat = ?," +
+            " kor = ?, eng = ?, mat = ?," +
             " tot = ?, avg = ?, grd = ? " +
             " where sjno = ? ";
     private String deleteSjSQL = " delete from sungjuk where " +
@@ -129,14 +129,13 @@ public class SungJukV4DAOImpl implements SungJukV4DAO{
         try{
             conn = MariaDB.makeConn();
             pstmt = conn.prepareStatement(updateSjSQL);
-            pstmt.setString(1, sjs.getName());
-            pstmt.setInt(2, sjs.getKor());
-            pstmt.setInt(3, sjs.getEng());
-            pstmt.setInt(4, sjs.getMat());
-            pstmt.setInt(5, sjs.getTot());
-            pstmt.setDouble(6, sjs.getAvg());
-            pstmt.setString(7, sjs.getGrd()+"");
-            pstmt.setInt(8, sjs.getSjno());
+            pstmt.setInt(1, sjs.getKor());
+            pstmt.setInt(2, sjs.getEng());
+            pstmt.setInt(3, sjs.getMat());
+            pstmt.setInt(4, sjs.getTot());
+            pstmt.setDouble(5, sjs.getAvg());
+            pstmt.setString(6, sjs.getGrd()+"");
+            pstmt.setInt(7, sjs.getSjno());
 
             cnt = pstmt.executeUpdate();
 

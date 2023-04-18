@@ -191,8 +191,6 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
         SungJukVO sj = sjdao.selectOneSungJuk(sjon);
         try {
             if (sj != null) {
-                System.out.println("이름을 입력하세요. 기존 이름 : " + sj.getName());
-                String name = input.next();
                 System.out.println("국어점수를 입력하세요. 기존 점수 : " + sj.getKor());
                 int kor = input.nextInt();
                 System.out.println("영어점수를 입력하세요. 기존 점수 : " + sj.getEng());
@@ -201,10 +199,10 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {
                 int mat = input.nextInt();
                 System.out.print("\n");
 
-                SungJukVO newOne = new SungJukVO(sjon, name, kor, eng, mat);
-                computeSungJuk(newOne);
+                sj = new SungJukVO(sjon, null, kor, eng, mat);
+                computeSungJuk(sj);
 
-                if (sjdao.updateSungJuk(newOne) > 0) System.out.println("데이터 수정 완료!");
+                if (sjdao.updateSungJuk(sj) > 0) System.out.println("데이터 수정 완료!");
 
             } else {
                 System.out.println("데이터가 없습니다!");
