@@ -12,7 +12,14 @@ import java.util.Scanner;
 public class C33JDBC {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println("사원 등록을 진행합니다.");
+
+        // EMPDAOImpl는 불필요하게 인스턴스 객체로 생성되지 않게 함
+        // 따라서, singleton 패턴을 이용해서 단일 객체로만 만들어지도록 함
+        // EMPDAO empdao = new EMPDAOImpl(); <= X
+        EMPDAO empdao = EMPDAOImpl.getInstance();
+
+
+        //System.out.println("사원 등록을 진행합니다.");
 
         System.out.print("사원번호 입력 : ");
         int empno = input.nextInt();
@@ -53,13 +60,13 @@ public class C33JDBC {
         EMPVO emp2 = new EMPVO(empno, fname, lname, email, phone);
 
 
-        /*if(EMPDAOImpl.insertEmp(emp)>0){
+        /*if(empdao.insertEmp(emp)>0){
             System.out.println("입력 성공!");
         } else {
             System.out.println("입력 실패");
         }*/
 
-/*        List<EMPVO> empdata =  EMPDAOImpl.selectEmp();
+/*        List<EMPVO> empdata =  empdao.selectEmp();
 
         String fmt = "%d %s %s %s %s %s %s %d %.2f %d %d\n";
         for(EMPVO emp : empdata) {
@@ -72,18 +79,18 @@ public class C33JDBC {
         System.out.print("조회할 사원 번호 입력 : ");
         int empno = input.nextInt();
 
-        EMPVO emp = EMPDAOImpl.selectOneEmp(empno);
+        EMPVO emp = empdao.selectOneEmp(empno);
         if(emp!=null) System.out.println(emp);
         else {System.out.println("해당 데이터가 존재하지 않습니다.");}
 
         System.out.print("삭제할 사원 번호 입력 : ");
         int empno = input.nextInt();
 
-        int delCheck = EMPDAOImpl.deleteEmp(empno);
+        int delCheck = empdao.deleteEmp(empno);
         if(delCheck!=0) System.out.println("사원 정보 삭제 성공!!");
         else {System.out.println("해당 데이터가 존재하지 않습니다.");}*/
 
-        if(EMPDAOImpl.updateEmp(emp2)>0){
+        if(empdao.updateEmp(emp2)>0){
             System.out.println("입력 성공!");
         } else {
             System.out.println("입력 실패");
@@ -233,26 +240,34 @@ interface EMPDAO {
     List<EMPVO> selectEmp();
     EMPVO selectOneEmp(int empno);
     int updateEmp(EMPVO emp);
-    int delectEmp(int emp);
+    int deleteEmp(int emp);
 }
 
-class EMPDAOImpl {
-    private static String insertEmpSQL = " insert into EMPLOYEES " +
+class EMPDAOImpl implements EMPDAO {
+    private String insertEmpSQL = " insert into EMPLOYEES " +
             " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
-    private static String selectEmpSQL = " select * from employees " +
+    private String selectEmpSQL = " select * from employees " +
             " order by EMPLOYEE_ID asc ";
-    private static String selectOneEmpSQL = " select * from employees " +
+    private String selectOneEmpSQL = " select * from employees " +
             " where EMPLOYEE_ID = ? ";
-    private static String deleteEmpSQL = " delete from employees where " +
+    private String deleteEmpSQL = " delete from employees where " +
             " EMPLOYEE_ID = ? ";
-    private static String updateEmpSQL = " update employees set " +
+    private String updateEmpSQL = " update employees set " +
             " FIRST_NAME = ?, LAST_NAME = ?, EMAIL = ?, PHONE_NUMBER = ? " +
             " where EMPLOYEE_ID = ? ";
 
+    // singleton을 위한 변수
+    private static EMPDAO instance = null;
 
-    public EMPDAOImpl() {}
+    private EMPDAOImpl() {}     // 생성자를 private로 지정하면 호출할 수 없음
+                                 // 인스턴스 객체로 생성되지 못하도록 할 수 있음
 
-    public static int insertEmp(EMPVO emp) {
+    public static EMPDAO getInstance() {
+        if(instance == null) instance = new EMPDAOImpl();
+        return instance;
+    }
+
+    public int insertEmp(EMPVO emp) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         int cnt = -1;
@@ -285,7 +300,7 @@ class EMPDAOImpl {
         return cnt;
     }
 
-    public static List<EMPVO> selectEmp() {
+    public List<EMPVO> selectEmp() {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -323,7 +338,7 @@ class EMPDAOImpl {
         return empdata;
     }
 
-    public static EMPVO selectOneEmp(int empno) {
+    public EMPVO selectOneEmp(int empno) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -360,7 +375,7 @@ class EMPDAOImpl {
         return emp;
     }
 
-    public static int deleteEmp(int empno) {
+    public int deleteEmp(int empno) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         int cnt = -1;
@@ -381,7 +396,7 @@ class EMPDAOImpl {
         return cnt;
     }
 
-    public static int updateEmp(EMPVO emp) {
+    public int updateEmp(EMPVO emp) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         int cnt = -1;
